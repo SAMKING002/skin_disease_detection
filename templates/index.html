@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <nav class="col-md-3 sidebar d-flex flex-column">
+                <h2 class="text-white text-center">DERMAVISION</h2>
+                <p class="sidebar-tagline text-white text-center">
+                    The smarter way to revolutionize dermatology
+                </p>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="#" class="nav-link text-white">🏠 Home</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('predicts') }}" class="nav-link text-white">📷 Predict Skin Condition</a>                        
+                    </li>
+                    <li class="nav-item"><a href="{{ url_for('about_us') }}" class="nav-link text-white">ℹ️ About System</a></li>
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link text-white">🔑 Sign In / Register</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link text-white">📞 Contact / Support</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Main Content -->
+            <main class="col-md-9 d-flex flex-column align-items-center p-3">
+                <!-- Images and Charts Container -->
+                <div class="content-container w-100 d-flex flex-column align-items-center">
+                    <!-- Image Section -->
+                    <div class="image-container d-flex justify-content-center gap-3 mb-4">
+                        <img src="{{ url_for('static', filename='images/skin1.jpg') }}" class="img-thumbnail" alt="Skin Disease 1">
+                        <img src="{{ url_for('static', filename='images/skin2.jpg') }}" class="img-thumbnail" alt="Skin Disease 2">
+                        <img src="{{ url_for('static', filename='images/skin3.png') }}" class="img-thumbnail" alt="Skin Disease 3">
+                    </div>
+                    
+                    <!-- Charts Section -->
+                    <div class="charts-wrapper d-flex flex-wrap justify-content-center gap-4 w-100">
+                        <div class="chart-container">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer text-center text-orange py-3">
+            Techminds Company &copy; 2025 Developed by Engineer Sam and Kevo. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+
+    
+</body>
+</html>

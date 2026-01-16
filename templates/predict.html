@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <nav class="col-md-3 sidebar d-flex flex-column">
+                <h2 class="text-white text-center">DERMAVISION</h2>
+                <p class="sidebar-tagline text-white text-center">
+                    The smarter way to revolutionize dermatology
+                </p>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link text-white">🏠 Home</a></li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-white">📷 Predict Skin Condition</a>                        
+                    </li>
+                    <li class="nav-item"><a href="{{ url_for('about_us') }}" class="nav-link text-white">ℹ️ About System</a></li>
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link text-white">🔑 Sign In / Register</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link text-white">📞 Contact / Support</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Main Content -->
+            <main class="col-md-9 d-flex flex-column align-items-center p-3">
+                <!-- Image Upload Form -->
+                <div class="w-100 text-center">
+                    <h2 class="mb-3">Upload Image for Prediction</h2>
+                    <form id="uploadForm" action="/predict" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+                        <input type="file" name="image" id="imageUpload" class="form-control mb-2 w-50" required>
+                        <button type="submit" class="btn btn-primary">📷 Predict Disease by One Click</button>
+                    </form>
+                </div>
+                <!-- Prediction Results -->
+                <div id="resultContainer" class="mt-4 text-center" style="display: none;">
+                    <h4 style="font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                     color: black;">
+                        Prediction Result</h4>
+                    <img id="uploadedImage" class="img-fluid mt-2" style="max-width: 300px; display: none;">
+                    <h3><strong>Disease:</strong> <span id="diseaseName"></span></h3>
+                    <h3><strong>Confidence:</strong> <span id="confidenceScore"></span></h3>
+                    <h4><strong>⚠️ IMPORTANT: CONSULT A DERMATOLOGIST FIRST IN CASES OF SEVERE CONDITIONS OR DIFFERENCES IN SYMPTOMS BEFORE FOLLOWING ANY RECOMMENDATIONS.</strong></h4>
+                    <h3> Description: </h3> 
+                    <div id="diseaseDescription" class="healthy-message"></div>
+ 
+                </div>
+            </main>
+            <script>
+                $(document).ready(function() {
+                    $("#uploadForm").submit(function(event) {
+                        event.preventDefault(); // Prevent default form submission
+            
+                        let formData = new FormData();
+                        let fileInput = $("#imageUpload")[0].files[0];
+            
+                        if (!fileInput) {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "No Image Selected",
+                                text: "Please select an image before uploading.",
+                                confirmButtonColor: "#f39c12"
+                            });
+                            return;
+                        }
+            
+                        formData.append("image", fileInput);
+            
+                        $.ajax({
+                            url: "/predict",
+                            type: "POST",
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+                                $("#resultContainer").show();
+                                $("#diseaseName").text(response.disease);
+                                $("#confidenceScore").text(response.confidence);
+                                $("#diseaseDescription").html(response.description.replace(/\n/g, "<br>"));
+                                $("#uploadedImage").attr("src", response.image_url).show();
+            
+                                // Check if no disease is detected and display a special message
+                                if (response.disease === "No skin condition detected") {
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "You are Okay!",
+                                        text: "No significant skin disease was detected in the image. Stay healthy!",
+                                        confirmButtonColor: "#2ecc71"
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Prediction Complete",
+                                        text: `Detected: ${response.disease} \n Confidence: ${response.confidence}`,
+                                        confirmButtonColor: "#3085d6"
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                let errorMessage = "Something went wrong. Please try again later.";
+                                if (xhr.responseJSON && xhr.responseJSON.error) {
+                                    errorMessage = xhr.responseJSON.error;
+                                }
+            
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Prediction Failed",
+                                    text: errorMessage,
+                                    confirmButtonColor: "#d33"
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+            
+
+            <!-- Footer -->
+        <footer class="footer text-center text-orange py-3">
+            Techminds Company &copy; 2025 Developed by Engineer Sam and Kevo. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        let scrollUpBtn = document.getElementById("scrollUpBtn");
+
+        // Show button when scrolling down
+        window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {  // Show button after 300px scroll
+            scrollUpBtn.style.display = "block";
+        } else {
+            scrollUpBtn.style.display = "none";
+        }
+       });
+
+       // Scroll to top smoothly when button is clicked
+       scrollUpBtn.addEventListener("click", function () {
+         window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+       });
+     });
+
+    </script>
+</body>
+</html>

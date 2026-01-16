@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Skin Disease Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <nav class="col-md-3 sidebar d-flex flex-column">
+                <h2 class="text-white text-center">DERMAVISION</h2>
+                <p class="sidebar-tagline text-white text-center">
+                    The smarter way to revolutionize dermatology
+                </p>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link text-white">🏠 Home</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('predicts') }}" class="nav-link text-white">📷 Predict Skin Condition</a>                        
+                    </li>
+                    <li class="nav-item"><a href="{{ url_for('about_us') }}" class="nav-link text-white">ℹ️ About System</a></li>
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link text-white">🔑 Sign In / Register</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">📞 Contact / Support</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Main Content -->
+            <main class="col-md-9 d-flex flex-column align-items-center p-3  ">
+                <!-- Contact Form -->
+                
+
+                <!-- Dermatologists Section -->
+                <section class="dermatologists mt-5">
+                    <h3 class="text-center mb-4">Meet Our Experts</h3>
+                    <div class="row">
+                        <!-- Dermatologist 1 -->
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/evans.jpeg') }}" alt="Dermatologist 1">
+                                <div class="dermatologist-info">
+                                    <h5>Dr. Evans Masanta</h5>
+                                    <p>Dr. Evans Masanta is a certified skin specialist with a master of Medicine degree in Dermatology. He has vast experience as a consultant dermatologist specializing in hair disorders, skin diseases, nail disorders.</p>
+                                    <p><strong>Location:</strong> Lengetia Place Kisii, Kenya</p>
+                                    <p><strong>Contact:</strong> +254 709 747 202</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dermatologist 2 -->
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/ven.jpg') }}" alt="Dermatologist 2">
+                                <div class="dermatologist-info">
+                                    <h5>Dr. Venkatesh Narasimhan</h5>
+                                    <p>Distinguished Kenyan Dermatologist in Nairobi with a passion for both clinical and cosmetic dermatology.</p>
+                                    <p><strong>Location:</strong> 14 Riverside Drive, Grosvenor Building, 6th Floor, Nairobi, Kenya </p>
+                                    <p><strong>Contact:</strong> +254 714 144 000</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dermatologist 3 -->
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/dr.png') }}" alt="Dermatologist 3">
+                                <div class="dermatologist-info">
+                                    <h5>Dr Abdiaziz Mohamed</h5>
+                                    <p>10+ years as a highly rated and recognized Dermatologist in Nairobi</p>
+                                    <p><strong>Location:</strong> Nairobi , Kenya</p>
+                                    <p><strong>Contact:</strong> +44 123 456 789</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dermatologist 4 -->
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/mzee.jpg') }}" alt="Dermatologist 4">
+                                <div class="dermatologist-info">
+                                    <h5>Dr. Said M Mzee</h5>
+                                    <p>He holds a Bachelor of Medicine and Surgery degree, and has over 30 years’ experience as a doctor in both Kenya and Tanzania.</p>
+                                    <p><strong>Location:</strong> Abdel Nasser Road, Mombasa</p>
+                                    <p><strong>Contact:</strong> +254 759 941 566</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/pranav.jpeg') }}" alt="Dermatologist 4">
+                                <div class="dermatologist-info">
+                                    <h5>Dr. Pranav Pancholi</h5>
+                                    <p> His specialized techniques include Electrosurgery, Cryosurgery, Chemosurgery, and Ablative CO2 Laser Therapy.</p>
+                                    <p><strong>Location:</strong> Sydney, Australia</p>
+                                    <p><strong>Contact:</strong> +254 714 500 500</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dermatologist 5 -->
+                        <div class="col-md-4">
+                            <div class="dermatologist-card">
+                                <img src="{{ url_for('static', filename='images/emily.jpg') }}" alt="Dermatologist 5">
+                                <div class="dermatologist-info">
+                                    <h5>Dr. Emily White</h5>
+                                    <p>Known for her work in dermatology for acne treatments and skincare education.</p>
+                                    <p><strong>Location:</strong> Toronto, Canada</p>
+                                    <p><strong>Contact:</strong> +1 416 123 4567</p>
+                                    <button class="btn btn-outline-primary dermatologist-button">Interact or Ask Question</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer text-center text-orange py-3">
+            Techminds Company &copy; 2025 Developed by Engineer Sam and Kevo. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        let scrollUpBtn = document.getElementById("scrollUpBtn");
+
+        // Show button when scrolling down
+        window.addEventListener("scroll", function () {
+        if (window.scrollY > 150) {  // Show button after 300px scroll
+            scrollUpBtn.style.display = "block";
+        } else {
+            scrollUpBtn.style.display = "none";
+        }
+       });
+
+       // Scroll to top smoothly when button is clicked
+       scrollUpBtn.addEventListener("click", function () {
+         window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+       });
+     });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <nav class="col-md-3 sidebar d-flex flex-column">
+                <h2 class="text-white text-center">DERMAVISION</h2>
+                <p class="sidebar-tagline text-white text-center">
+                    The smarter way to revolutionize dermatology
+                </p>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link text-white">🏠 Home</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('predicts') }}" class="nav-link text-white">📷 Predict Skin Condition</a>                        
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">ℹ️ About System</a></li>
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link text-white">🔑 Sign In / Register</a></li>
+                    <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link text-white">📞 Contact / Support</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Main Content -->
+            <main class="col-md-9 d-flex flex-column align-items-center p-4">
+                <div class="w-100 text-center">
+                    <h2 class="mb-4" style="font-weight: bold;"> Welcome to DermaVision</h2>
+                    <p style="font-size: 18px; max-width: 800px; text-align: justify;">
+                        <strong> DermaVision </strong> a <strong>Skin Disease Detection System</strong> is an AI-powered platform designed to assist individuals in identifying 
+                        potential skin conditions using deep learning models. The system leverages **computer vision and machine learning** 
+                        to analyze uploaded skin images, providing users with disease predictions along with confidence scores.
+                    </p>
+                    
+                    <h3 class="mt-4">How It Works</h3>
+                    <ol class="text-start" style="max-width: 800px; font-size: 18px;">
+                        <li><strong>Upload an Image:</strong> Users can upload a clear image of the affected skin area.</li>
+                        <li><strong>AI Analysis:</strong> The system processes the image through a trained deep learning model.</li>
+                        <li><strong>Prediction Results:</strong> The system displays the predicted skin condition, a confidence score, and additional information.</li>
+                        <li><strong>Recommendations:</strong> The system may suggest whether to seek professional medical advice.</li>
+                    </ol>
+                    
+                    
+                    <h3>Account & Usage Options</h3>
+                    <p>
+                        Users have two options when using the system:
+                    </p>
+                    <ul class="text-start">
+                        <li><strong>🔹 Guest Mode:</strong> You can use the system once without signing in, but your search history will not be saved.</li>
+                        <li><strong>🔹 Account Mode:</strong> Creating an account allows you to track past searches, review past predictions, and access additional features.</li>
+                    </ul>
+            
+                    <p>Interested in saving your search history and using advanced features? Create an account or log in below:</p>
+            
+                    <!-- Login/Register Button -->
+                    <a href="{{ url_for('login') }}" class="btn btn-primary"> Login / Register</a>
+            
+                    <h3 class="mt-4">Why Use This System?</h3>
+                    <ul class="text-start" style="max-width: 800px; font-size: 18px;">
+                        <li> **Fast and Accurate** - Provides instant predictions using AI.</li>
+                        <li> **User-Friendly** - Simple interface for easy navigation.</li>
+                        <li> **Educational Resource** - Learn about different skin conditions.</li>
+                        <li> **Accessible Anywhere** - Available 24/7 from any device.</li>
+                    </ul>
+            
+                    <h3 class="mt-4">Important Note</h3>
+                    <p style="font-size: 18px; max-width: 800px; text-align: justify;">
+                        This system is not a replacement for professional medical diagnosis. If the AI detects a possible 
+                        skin condition, we recommend consulting a dermatologist for further evaluation and treatment.
+                    </p>
+                </div>
+            </main>
+            
+            
+           
+        <!-- Footer -->
+        <footer class="footer text-center text-orange py-3">
+            Techminds Company &copy; 2025 Developed by Engineer Sam and Kevo. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        let scrollUpBtn = document.getElementById("scrollUpBtn");
+
+        // Show button when scrolling down
+        window.addEventListener("scroll", function () {
+        if (window.scrollY > 150) {  // Show button after 300px scroll
+            scrollUpBtn.style.display = "block";
+        } else {
+            scrollUpBtn.style.display = "none";
+        }
+       });
+
+       // Scroll to top smoothly when button is clicked
+       scrollUpBtn.addEventListener("click", function () {
+         window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+       });
+     });
+
+    </script>
+
+    
+</body>
+</html>

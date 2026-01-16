@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column min-vh-100">
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <nav class="col-md-3 sidebar d-flex flex-column">
+                <h2 class="text-white text-center">DERMAVISION</h2>
+                <p class="sidebar-tagline text-white text-center">
+                    The smarter way to revolutionize dermatology
+                </p>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="" class="nav-link text-white" onclick="showSection('welcome'); return false;">🏠 Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link text-white" onclick="showSection('predict'); return false;">📷 Predict Skin Condition</a></li>                    
+                    <li class="nav-item"><a href="" class="nav-link text-white" onclick="showSection('about'); return false;">ℹ️ About System</a></li>
+                    <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link text-white">🔚 Log out</a></li>
+                    <a href="" id="viewRecordsBtn" class="nav-link text-white">📋 View Records</a>
+                </ul>
+            </nav>
+            <!-- Main Content -->
+            <div class="col-md-9 content p-4">
+                <section id="welcome" class="content-section text-center p-5 bg-light shadow-lg rounded">
+                    <div class="container">
+                        <h1 class="mb-4 fw-bold text-dark">
+                            Welcome back, <span class="text-primary">{{ username }}</span>!
+                        </h1>
+                        <p class="lead text-muted">
+                            Step into the future of AI-powered skin health analysis, With our advanced detection system helping you identify skin conditions with accuracy, speed, and reliability.
+                        </p>
+                        <div class="mt-4">
+                            <img src="{{ url_for('static', filename='images/AI-Dermatology.jpg') }}" alt="AI Skin Detection" class="img-fluid rounded shadow-sm" width="600">
+                        </div>
+                        <a href="#" class="btn btn-primary btn-lg mt-3 shadow-sm" onclick="showSection('predict'); return false;">
+                            Get Started <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        
+                    </div>
+                </section>
+
+                <section id="predict" class="content-section" style="display: none;">
+                    <!-- Image Upload Form -->
+                    <div class="w-100 text-center">
+                        <h2 class="mb-3" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                        font-size: 2.5em;">Upload Image for Prediction</h2>
+                        <form id="uploadForm" action="/Uploadimages" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+                            <input type="file" name="image" id="imageUpload" class="form-control mb-2 w-50" required>
+                            <button type="submit" class="btn btn-primary">📷 Predict Disease by One Click</button>
+                        </form>
+                    </div>
+                    <!-- Prediction Results -->
+                    <div id="resultContainer" class="mt-4 text-center" style="display: none;">
+                        <h4 style="font-size: 40px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                         color: black;">
+                            Prediction Result</h4>
+                        <img id="uploadedImage" class="img-fluid mt-2" style="max-width: 300px; display: none;">
+                        <h3><strong>Disease:</strong> <span id="diseaseName"></span></h3>
+                        <h3><strong>Confidence:</strong> <span id="confidenceScore"></span></h3>
+                        <h4><strong>⚠️ IMPORTANT: CONSULT A DERMATOLOGIST FIRST IN CASES OF SEVERE CONDITIONS OR DIFFERENCES IN SYMPTOMS BEFORE FOLLOWING ANY RECOMMENDATIONS.</strong></h4>
+                        <h3> Description: </h3> 
+                        <div id="diseaseDescription" class="healthy-message"></div>
+     
+                    </div>
+                    
+                </section>
+
+                <section id="about" class="content-section" style="display: none;">
+                    <div class="w-100 text-center">
+                        <h2 class="mb-4" style="font-weight: bold;"> Welcome to DermaVision</h2>
+                        <p style="font-size: 18px; max-width: 800px; text-align: justify;">
+                            <strong> DermaVision </strong> a <strong>Skin Disease Detection System</strong> is an AI-powered platform designed to assist individuals in identifying 
+                            potential skin conditions using deep learning models. The system leverages **computer vision and machine learning** 
+                            to analyze uploaded skin images, providing users with disease predictions along with confidence scores.
+                        </p>
+                        
+                        <h3 class="mt-4">How It Works</h3>
+                        <ol class="text-start" style="max-width: 800px; font-size: 18px; list-style-type: none;">
+                            <li><strong>Upload an Image:</strong> Users can upload a clear image of the affected skin area.</li>
+                            <li><strong>AI Analysis:</strong> The system processes the image through a trained deep learning model.</li>
+                            <li><strong>Prediction Results:</strong> The system displays the predicted skin condition, a confidence score, and additional information.</li>
+                            <li><strong>Recommendations:</strong> The system may suggest whether to seek professional medical advice.</li>
+                        </ol>
+                        
+                        <h3 class="mt-4">Why Use This System?</h3>
+                        <ul class="text-start" style="max-width: 800px; font-size: 18px; list-style-type: none;">
+                            <li> **Fast and Accurate** - Provides instant predictions using AI.</li>
+                            <li> **User-Friendly** - Simple interface for easy navigation.</li>
+                            <li> **Educational Resource** - Learn about different skin conditions.</li>
+                            <li> **Accessible Anywhere** - Available 24/7 from any device.</li>
+                        </ul>
+                
+                        <h3 class="mt-4">Important Note</h3>
+                        <p style="font-size: 18px; max-width: 800px; text-align: justify;">
+                            This system is not a replacement for professional medical diagnosis. If the AI detects a possible 
+                            skin condition, we recommend consulting a dermatologist for further evaluation and treatment.
+                        </p>
+                    </div>
+                </section>
+                <section id="view-records" class="content-section text-center p-5 bg-white shadow-lg rounded" style="display: none;">
+                    <div class="container">
+                        <h2 class="mb-4 fw-bold text-dark">📋 Your Diagnosis Records</h2>
+                        <p class="lead text-muted">Here are your past skin condition analyses. Keep track of all analysis done.</p>
+                        
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered table-hover shadow-sm">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Uploaded Image</th>
+                                        <th>Disease Detected</th>
+                                        <th>Confidence Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Records will be dynamically inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+            </div>
+        </div>
+
+            <!-- Footer -->
+        <footer class="footer text-center text-orange py-3">
+            Techminds Company &copy; 2025 Developed by Engineer Sam and Kevo. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        let scrollUpBtn = document.getElementById("scrollUpBtn");
+
+        // Show button when scrolling down
+        window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {  // Show button after 300px scroll
+            scrollUpBtn.style.display = "block";
+        } else {
+            scrollUpBtn.style.display = "none";
+        }
+       });
+
+       // Scroll to top smoothly when button is clicked
+       scrollUpBtn.addEventListener("click", function () {
+         window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+       });
+     });
+
+    </script>
+    <script>
+    function showSection(sectionId) {
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none';
+        });
+
+        let selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+            history.pushState(null, null, '/dashboard');  // Always push '/dashboard' without changing section ID in URL
+        }
+    }
+
+    window.addEventListener('load', function() {
+        showSection('welcome');  // Default to 'welcome' section when the page is loaded
+    });
+
+    window.addEventListener('popstate', function() {
+        showSection('welcome');  // When the user uses the back button, default to 'welcome' section
+    });
+</script>
+
+    <script>
+        $(document).ready(function() {
+            $("#uploadForm").submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+    
+                let formData = new FormData();
+                let fileInput = $("#imageUpload")[0].files[0];
+    
+                if (!fileInput) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "No Image Selected",
+                        text: "Please select an image before uploading.",
+                        confirmButtonColor: "#f39c12"
+                    });
+                    return;
+                }
+    
+                formData.append("image", fileInput);
+    
+                $.ajax({
+                    url: "/Uploadimages",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $("#resultContainer").show();
+                        $("#diseaseName").text(response.disease);
+                        $("#confidenceScore").text(response.confidence);
+                        $("#diseaseDescription").html(response.description.replace(/\n/g, "<br>"));
+                        $("#uploadedImage").attr("src", response.image_url).show();
+    
+                        // Check if no disease is detected and display a special message
+                        if (response.disease === "No skin condition detected") {
+                            Swal.fire({
+                                icon: "info",
+                                title: "You are Okay!",
+                                text: "No significant skin disease was detected in the image. Stay healthy!",
+                                confirmButtonColor: "#2ecc71"
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Prediction Complete",
+                                text: `Detected: ${response.disease} \n Confidence: ${response.confidence}`,
+                                confirmButtonColor: "#3085d6"
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = "Something went wrong. Please try again later.";
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage = xhr.responseJSON.error;
+                        }
+    
+                        Swal.fire({
+                            icon: "error",
+                            title: "Prediction Failed",
+                            text: errorMessage,
+                            confirmButtonColor: "#d33"
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('viewRecordsBtn').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+    
+                // Show the 'view-records' section
+                showSection('view-records');
+    
+                // Fetch user's records from the database
+                fetch('/fetch_records')
+                    .then(response => response.json())
+                    .then(data => {
+                        let tableBody = document.querySelector('#view-records tbody');
+                        tableBody.innerHTML = '';  // Clear existing rows
+    
+                        if (data.records && data.records.length > 0) {
+                            data.records.forEach(record => {
+                                let row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td><img src="${record.image_url}" alt="Uploaded Image" class="img-thumbnail" width="100"></td>
+                                    <td>${record.disease}</td>
+                                    <td class="fw-bold text-success">${record.confidence}%</td>
+                                `;
+                                tableBody.appendChild(row);
+                            });
+                        } else {
+                            tableBody.innerHTML = '<tr><td colspan="3" class="text-center text-muted">No records found.</td></tr>';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching records:', error));
+            });
+        });
+    </script>
+     <!-- Scroll Up Button -->
+    <button id="scrollUpBtn" class="scroll-up-btn">⬆</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        let scrollUpBtn = document.getElementById("scrollUpBtn");
+
+        // Show button when scrolling down
+        window.addEventListener("scroll", function () {
+        if (window.scrollY > 150) {  // Show button after 300px scroll
+            scrollUpBtn.style.display = "block";
+        } else {
+            scrollUpBtn.style.display = "none";
+        }
+       });
+
+       // Scroll to top smoothly when button is clicked
+       scrollUpBtn.addEventListener("click", function () {
+         window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+       });
+     });
+
+    </script>       
+         
+</body>
+</html>

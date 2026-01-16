@@ -1,0 +1,477 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: #343a40;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Sidebar Title */
+.sidebar h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Sidebar Tagline */
+.sidebar-tagline {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* Sidebar Links & Buttons */
+.sidebar .nav-link, .upload-btn {
+    font-size: 1.3rem;
+    color: white;
+    padding: 12px;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar .nav-link:hover, .upload-btn:hover {
+    text-decoration: none;
+}
+
+/* Upload Button Styling */
+.upload-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: block;
+    font-size: 1.3rem;
+}
+
+/* Main Content Layout */
+main {
+    background-color: white;
+    padding: 20px;
+}
+
+/* Image Section */
+.image-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.image-container img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Charts Section */
+.charts-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 400px; /* Adjusts size for different screens */
+    height: 300px;
+}
+
+/* Footer */
+.footer {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 100%;
+}
+/* Scroll Up Button */
+.scroll-up-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: hsl(211, 69%, 22%);
+    color: rgb(224, 156, 8);
+    border: none;    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.scroll-up-btn:hover {
+    background-color: hsl(211, 90%, 12%);
+    border-radius: 10px;
+}
+
+.scroll-up-btn.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Center the main content vertically and horizontally */
+.mb-3{
+    margin-top: 20px;
+    
+}
+
+/* Styling for the form container */
+#uploadForm {
+    background: rgba(240, 220, 220, 0.95); /* Subtle transparency */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 60%;
+    max-width: 500px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 30px; 
+    margin-left: 25%;
+}
+
+/* Style the heading */
+h3 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Style the file input */
+#imageUpload {
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Predict button styling */
+#uploadForm button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#uploadForm button:hover {
+    background: #0056b3;
+}
+#diseaseName{
+    font-size: 40px; 
+    font-weight: 500; 
+    color: #e6cf05; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#diseaseDescription {
+    font-size: 20px; 
+    font-weight: 500; 
+    color: #333; 
+    line-height: 1.6; 
+    text-align: justify; 
+    background-color: #d9e9f8; 
+    padding: 20px; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-radius: 5px; 
+    border-left: 4px solid #007bff; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+#confidenceScore{
+    font-size: 30px; 
+    font-weight: 500; 
+    color: #030303;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+/* Main Content Styling */
+main {
+    background-color: #f7dcdc;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 900px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: auto;
+}
+
+/* Headings */
+main h2 {
+    font-size: 32px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+main h3 {
+    font-size: 24px;
+    color: #2980b9;
+    margin-top: 20px;
+}
+
+/* Paragraph Styling */
+main p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+/* Lists */
+main ul {
+    list-style-type: none;
+    padding-left: 20px;
+    text-align: left;
+}
+main li {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.btn-primary {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: darkgoldenrod;
+}
+
+/* General form styles */
+form {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+/* Form heading */
+form h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+form p {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+/* Input fields */
+form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Labels */
+form .form-label {
+    font-weight: 500;
+    color: #050505;
+}
+
+/* Dropdown select */
+form .form-select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Buttons */
+form button {
+    background: #007bff;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+/* Toggle buttons for switching forms */
+#showRegister,
+#showLogin {
+    font-size: 16px;
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#showRegister {
+    background: #28a745;
+    color: white;
+}
+
+#showLogin {
+    background: #6c757d;
+    color: white;
+}
+
+#showRegister:hover {
+    background: #218838;
+}
+
+#showLogin:hover {
+    background: #5a6268;
+}
+ /* Additional styling for this page */
+ .contact-form input, .contact-form textarea {
+    margin-bottom: 15px;
+}
+.dermatologist-card {
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+}
+.dermatologist-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.dermatologist-info {
+    text-align: center;
+    margin-top: 10px;
+}
+.dermatologist-info h5 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.dermatologist-info p {
+    font-size: 0.9rem;
+    color: #555;
+}
+.dermatologist-button {
+    margin-top: 10px;
+}
+/* Center forms */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+    main h2 {
+        font-size: 26px;
+    }
+    main h3 {
+        font-size: 20px;
+    }
+    main p {
+        font-size: 16px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #uploadForm {
+        width: 90%;
+        margin-left:5px;
+    }
+
+    #imageUpload {
+        width: 100%;
+    }
+}
+/* Styling for the Welcome Section */
+#welcome {
+    background: linear-gradient(to bottom right, #eecee6, #e9ecef); /* Soft gradient */
+    border-radius: 12px;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#welcome h1 {
+    font-size: 2.5rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: #212529; /* Dark Gray */
+}
+
+#welcome .text-primary {
+    color: #3108c7 !important; /* Bootstrap Primary Blue */
+}
+
+#welcome p.lead {
+    font-size: 2.0rem;
+    color: #6c757d; /* Muted Text */
+    line-height: 1.2;
+    max-width: 750px;
+    margin: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#welcome img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+#welcome img:hover {
+    transform: scale(1.03); /* Slight zoom effect */
+}
+
+#welcome .fs-5 {
+    font-size: 2.1rem;
+    color: #343a40; /* Dark Gray */
+    font-weight: 500;
+    max-width: 600px;
+    margin: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#welcome .btn-primary {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+#welcome .btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
